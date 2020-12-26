@@ -1,57 +1,49 @@
-<!-- ヒアドキュメント(改行や字下げの保持) -->
+<!-- switch文 -->
 <?php
 
-$name = 'taguchi';
+$signal = 'pink';
 
-$text = <<<EOT
-hello! $name
-    this is looooong
-text!
-
-EOT;
-
-echo $text; 
-
-// 変数を使った演算
-<?php
-
-$price = 500;
-
-$price += 100; #600
-$price *= 100; #60000
-
-$price++; #60001
-$price--; #60000
-
-echo $price . PHP_EOL;
-
-// 定数(define,const)
-<?php
-define('NAME', 'taguchi')
-echo NAME . PHP_EOL;
-
-const NAME = 'dotinstall';
-echo NAME . PHP_EOL;
-
-// キャスト(データ型の変更)
-<?php
-
-$x = (float)5; //string→floatに変更
-$y = (string)3.2; //string→floatに変更
-
-var_dump($x);
-var_dump($y);
-
-// if文
-<?php
-// $score = 85;
-// $score = 70;
-$score = 40;
-
-if ($score >= 80) {
-    echo 'Great!' . PHP_EOL;
-} elseif ($score >= 60) {
-    echo 'Good!' . PHP_EOL;
-} else {
-    echo 'OK!' . PHP_EOL;
+switch ($signal) {
+    case 'red': #比較する値の後はコロン
+        echo 'Stop' . PHP_EOL;
+        break; #処理を終える時必ず記述
+    case 'yellow':
+        echo 'Caution' . PHP_EOL;
+        break;
+    case 'blue':
+    case 'green': #blue or yellowの場合
+        echo 'Go' . PHP_EOL;
+        break;
+    default: #どの条件にも当てはまらなかった場合
+    echo 'Wrong signal!!' . PHP_EOL;
+    break;
 }
+
+// for文(特定の処理を繰り返すループ処理)
+<?php 
+
+for ($i = 1; $1 <= 5; $1++) {
+     // echo 'Hello' . PHP_EOL;
+    echo "$i - Hello" . PHP_EOL;
+}
+
+// while文(ある条件が満たされている間、特定の処理を繰り返す)
+
+<?php
+
+$hp = 100;
+
+while ($hp > 0) {
+    echo "Your HP: $hp" . PHP_EOL;
+    $hp -= 15;
+}
+
+// do-while(とりあえず一回は実行して条件次第でまた実行)
+<?php
+
+$hp = -50;
+
+do {
+    echo "Your HP: $hp" . PHP_EOL;
+    $hp -= 15;
+} while ($hp > 0);
