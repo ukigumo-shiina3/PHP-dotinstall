@@ -1,49 +1,78 @@
-<!-- switch文 -->
+<!-- continue(ループをスキップ),break(ループを途中で抜ける) -->
 <?php
 
-$signal = 'pink';
-
-switch ($signal) {
-    case 'red': #比較する値の後はコロン
-        echo 'Stop' . PHP_EOL;
-        break; #処理を終える時必ず記述
-    case 'yellow':
-        echo 'Caution' . PHP_EOL;
-        break;
-    case 'blue':
-    case 'green': #blue or yellowの場合
-        echo 'Go' . PHP_EOL;
-        break;
-    default: #どの条件にも当てはまらなかった場合
-    echo 'Wrong signal!!' . PHP_EOL;
+for ($i = 1; $i <= 10; $i++) {
+  // if ($i === 4) {
+  // if ($i % 3 === 0) {
+  //   continue;
+  // }
+    if ($i === 4) {
     break;
+    }
+    echo $i . PHP_EOL;
 }
 
-// for文(特定の処理を繰り返すループ処理)
-<?php 
-
-for ($i = 1; $1 <= 5; $1++) {
-     // echo 'Hello' . PHP_EOL;
-    echo "$i - Hello" . PHP_EOL;
-}
-
-// while文(ある条件が満たされている間、特定の処理を繰り返す)
-
+// 関数(同じような処理を書く場合)
 <?php
 
-$hp = 100;
-
-while ($hp > 0) {
-    echo "Your HP: $hp" . PHP_EOL;
-    $hp -= 15;
+function showAd() 
+{
+  echo '----------' . PHP_EOL;
+  echo '--- Ad ---' . PHP_EOL;
+  echo '----------' . PHP_EOL;
 }
 
-// do-while(とりあえず一回は実行して条件次第でまた実行)
+showAd();
+echo 'Tom is great!' . PHP_EOL;
+echo 'Bob is great!' . PHP_EOL;
+showAd();
+echo 'Steve is great!' . PHP_EOL;
+echo 'Bob is great!' . PHP_EOL;
+showAd();
+
+// 引数
 <?php
 
-$hp = -50;
+function showAd($message = 'Ad') //仮引数 ($message = 'Ad')は何も引数を渡さなかった時の値
+{
+  echo '----------' . PHP_EOL;
+  echo '--- ' . $message . ' ---' . PHP_EOL;
+  echo '----------' . PHP_EOL;
+}
 
-do {
-    echo "Your HP: $hp" . PHP_EOL;
-    $hp -= 15;
-} while ($hp > 0);
+showAd('Header Ad'); //実引数
+echo 'Tom is great!' . PHP_EOL;
+echo 'Bob is great!' . PHP_EOL;
+showAd('Ad');
+showAd()
+echo 'Steve is great!' . PHP_EOL;
+echo 'Bob is great!' . PHP_EOL;
+showAd('Footer Ad');
+
+// return
+<?php
+
+function sum($a, $b ,$c)
+{
+  // echo $a + $b + $c .PHP_EOL;
+  return $a + $b + $c .PHP_EOL;
+  echo 'Here' . PHP_EOL;
+}
+
+// sum(100,200,300); //600
+// sum(300,400,500); //1200
+echo sum(100, 200, 300) + sum(300, 400, 500) . PHP_EOL; // 1800
+
+// スコープ
+<?php
+
+$rate = 1.1; //グローバルスコープ(関数外)
+
+function sum($a, $b, $c)
+{
+  // global $rate; //関数の外で$rateが指定されたと宣言
+  $rate = 1.08 //ローカルスコープ（関数内)
+  return ($a + $b + $c) * $rate;
+}
+
+echo sum(100, 200, 300) + sum(300, 400, 500) . PHP_EOL; // 1944
