@@ -1,78 +1,56 @@
-<!-- continue(ループをスキップ),break(ループを途中で抜ける) -->
+<!-- 無名関数(クロージャー) -->
 <?php
 
-for ($i = 1; $i <= 10; $i++) {
-  // if ($i === 4) {
-  // if ($i % 3 === 0) {
-  //   continue;
+// function sum($a, $b, $c)
+// {
+//   return $a + $b + $c;
+// }
+
+$sum = function ($a + $b, $c) {  //関数を値として代入する場合はfunctionの後にスペースを入れる
+  return $a + $b + $c;
+}; //普通の関数は「;」不要だが、値として代入する場合はいる
+
+echo $sum(100, 300, 500) . PHP_EOL;
+
+//条件演算子
+<?php
+
+function sum($a, $b, $c) 
+{
+  $total = $a + $b + $c;
+
+  // if ($total < 0) {
+  //   return 0;
+  // } else {
+  //   return $total;
   // }
-    if ($i === 4) {
-    break;
-    }
-    echo $i . PHP_EOL;
+  return $total < 0 ? 0 : $total; // 「条件 ? 値(true) : 値(false)」
 }
 
-// 関数(同じような処理を書く場合)
+echo sum(100, 300, 500) . PHP_EOL; // 900
+echo sum(-1000, 300, 500) . PHP_EOL; // 0
+
+//型付け(予期しない値を弾く)
 <?php
 
-function showAd() 
+declare(strict_types=1); //厳密に型をチェック、「'4'」をPHPが勝手に数値に変換することを防ぐ
+
+function showInfo(string $name, int $score): void //引数の前に型を指定, 返り値の指定は「:」の後、返り値がない場合はvoidを使う
 {
-  echo '----------' . PHP_EOL;
-  echo '--- Ad ---' . PHP_EOL;
-  echo '----------' . PHP_EOL;
+  echo $name . ': ' . $score . PHP_EOL;
 }
 
-showAd();
-echo 'Tom is great!' . PHP_EOL;
-echo 'Bob is great!' . PHP_EOL;
-showAd();
-echo 'Steve is great!' . PHP_EOL;
-echo 'Bob is great!' . PHP_EOL;
-showAd();
+showInfo('taguchi', 40);
 
-// 引数
+//条件演算子(nullの判別)
 <?php
 
-function showAd($message = 'Ad') //仮引数 ($message = 'Ad')は何も引数を渡さなかった時の値
+declare(strict_types=1);
+
+function getAward(?int $score): ?string //「?」をつけるとnullか?その型か(stringなど)か判別できる
 {
-  echo '----------' . PHP_EOL;
-  echo '--- ' . $message . ' ---' . PHP_EOL;
-  echo '----------' . PHP_EOL;
+  return $score >= 100 ? 'Gold Medal' : null;
 }
 
-showAd('Header Ad'); //実引数
-echo 'Tom is great!' . PHP_EOL;
-echo 'Bob is great!' . PHP_EOL;
-showAd('Ad');
-showAd()
-echo 'Steve is great!' . PHP_EOL;
-echo 'Bob is great!' . PHP_EOL;
-showAd('Footer Ad');
-
-// return
-<?php
-
-function sum($a, $b ,$c)
-{
-  // echo $a + $b + $c .PHP_EOL;
-  return $a + $b + $c .PHP_EOL;
-  echo 'Here' . PHP_EOL;
-}
-
-// sum(100,200,300); //600
-// sum(300,400,500); //1200
-echo sum(100, 200, 300) + sum(300, 400, 500) . PHP_EOL; // 1800
-
-// スコープ
-<?php
-
-$rate = 1.1; //グローバルスコープ(関数外)
-
-function sum($a, $b, $c)
-{
-  // global $rate; //関数の外で$rateが指定されたと宣言
-  $rate = 1.08 //ローカルスコープ（関数内)
-  return ($a + $b + $c) * $rate;
-}
-
-echo sum(100, 200, 300) + sum(300, 400, 500) . PHP_EOL; // 1944
+echo getAward(150) . PHP_EOL;
+echo getAward(40) . PHP_EOL;
